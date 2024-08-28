@@ -1,0 +1,72 @@
+<style>
+    *{
+        text-align: center;
+        padding: 5px;
+        margin: 10px;
+    }
+    .texterror,.emailerror,.numbererror{
+        color: palevioletred;
+        display: none;
+    }
+    .div{
+        text-align: center;
+        border: solid black 2px;
+        width: fit-content;
+        color: brown;
+    }
+</style>
+
+<div class="div">
+    <h1>Enter your details..</h1>
+    <form id="form">
+        <input type="text" placeholder="Name" id="name" >
+        <span class="texterror">Please provide a valid name</span><br>
+        <input type="email" placeholder="Email" id="email">
+        <span class="emailerror">Please provide a valid email</span><br>
+        <input type="number" placeholder="Phone no" id="number">
+        <span class="numbererror">Enter a valid phone number</span><br>
+        <input type="submit" id="submit" value="Submit">
+    </form>
+</div>
+
+<script>
+    document.getElementById("submit").addEventListener("click", function(event){
+        event.preventDefault();
+
+        var nameRegx = /^[a-zA-Z]+$/;
+        var emailRegx = /^[a-z0-9]+@gmail.com$/;
+        var numberRegx = /^\d{10}$/;
+        
+        var name = document.getElementById("name");
+        var email = document.getElementById("email");
+        var number = document.getElementById("number");
+
+        var isValid = true;
+
+        if(!nameRegx.test(name.value)) {
+            document.querySelector(".texterror").style.display = "inline";
+            isValid = false;
+        } else {
+            document.querySelector(".texterror").style.display = "none";
+        }
+
+        if(!emailRegx.test(email.value)) {
+            document.querySelector(".emailerror").style.display = "inline";
+            isValid = false;
+        } else {
+            document.querySelector(".emailerror").style.display = "none";
+        }
+
+        if(!numberRegx.test(number.value)) {
+            document.querySelector(".numbererror").style.display = "inline";
+            isValid = false;
+        } else {
+            document.querySelector(".numbererror").style.display = "none";
+        }
+
+        if(isValid) {
+            // You can add your form submission logic here
+            alert("Form submitted successfully");
+        }
+    });
+</script>
